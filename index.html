@@ -4,144 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-<style>
-    body {
-        margin: 0;
-        background: url("./galaxy.jpg");
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-size: cover;
-        background-position: center center;
-
-        color: white;
-        text-align: center;
-        font-size: 2em;
-        font-family: Verdana, Microsoft JhengHei;
-    }
-    input[type="button" i] {
-        -webkit-appearance: push-button;
-        user-select: none;
-        white-space: pre;
-        align-items: flex-start;
-        text-align: center;
-        cursor: default;
-        color: buttontext;
-        background-color: buttonface;
-        box-sizing: border-box;
-        padding: 1px 6px;
-        border-width: 2px;
-        border-style: outset;
-        border-color: buttonface;
-        border-image: initial;
-
-        font-size: 1em;
-        font-family: Verdana, Microsoft JhengHei;
-    }
-    #game {
-        width: 100vw;
-        height: 80vh;
-        background: transparent;
-        cursor: url("./cursor2.png") 50 50, auto;
-        overflow: hidden;
-        position: relative;
-    }
-    #game:active {
-        cursor: url("./cursor.png") 50 50, auto;
-    }
-    #game img {
-        width: 150px;
-        position: absolute;
-    }
-</style>
+    <title>星星射擊遊戲</title>
+    <style>
+        body {
+            margin: 0;
+            background: url('./bg.svg');
+            background-position: center;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+    </style>
 </head>
 <body>
     <div id="openGame">
         <img src="./star.png" alt="star"> +1分
         <img src="./spaceship.png" alt="spaceship"> -1分
+        <img src="./未命名-1.svg" alt="" srcset="">
     </div>
-    <div id="game">
-    </div>
-    <input type="button" id="start" value="開始遊戲">
-    <p>分數：<span id="score">0</span>分&emsp;&emsp;剩餘：<span id="time">0</span>秒</p>
+
     <script src="jquery-3.4.1.min.js"></script>
-<script>
-    $(openGame).hide()
-    $(function(){
-        $(start).on('click',function(){
-            $('#game').empty()
-            $(this).attr('disabled',true)
-            score=0
-            let time=5
-            $('#score').text(score)
-            $('#time').text(time)
-            let rand=(num)=>{
-                return Math.round(Math.random()*num)
-            }
-
-            let move=(prefix,id)=>{
-                $(`#${prefix}${id}`).animate({
-                    left: rand(100)+'%',
-                    top: rand(100)+'%'
-                },2000,function(){
-                    move(prefix,id)
-                })
-            }
-
-            let tsid=0
-            let ssid=0
-            let gameTimer=setInterval(()=>{
-                time--
-                $('#time').text(time)
-
-                if(time==0){
-                    clearInterval(gameTimer)
-                    setTimeout(()=>{
-                        alert('時間到')
-                        $('#game img').remove()
-                    },1000)
-                    $(this).attr('disabled',false)
-                }
-                
-                let num=rand(10)
-                console.log(num)
-                if(num<5){
-                    $('#game').append(`<img src="./star.png" id="ts${tsid}">`)
-                    $(`#ts${tsid}`).css({
-                        left: rand(90)+'%',
-                        top: rand(90)+'%'
-                    })
-                    move('ts',tsid)
-                    tsid++
-                }
-
-                if(num>6){
-                    $('#game').append(`<img src="./spaceship.png" id="ss${ssid}">`)
-                    $(`#ss${ssid}`).css({
-                        left: rand(90)+'%',
-                        top: rand(90)+'%'
-                    })
-                    move('ss',ssid)
-                    ssid++
-                }
-            },1000)
-        })
-
-        let score=0
-        $('#game').on('click','img',function(){
-            $(this).attr('src','./explode.png')
-            $(this).stop()
-            $(this).css('pointer-events','none')
-            let idCode=$(this).attr('id').slice(0,2)
-            console.log(idCode)
-            if(idCode=='ts'){
-                score++
-            }else{
-                score--
-            }
-            $('#score').text(score)
-        })
-    })
-</script>
 </body>
 </html>
