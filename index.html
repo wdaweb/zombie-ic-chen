@@ -10,7 +10,7 @@
         body {
             font-family: var(--font-family-sans-serif), 'Microsoft JhengHei';
         }
-        .w-20 {
+        .h-20 {
             width: 20% !important;
         }
         .h-80 {
@@ -34,35 +34,36 @@
             object-fit: contain;
         }
 
+        #gamefield img {
+            position: absolute;
+            user-select: none;
+        }
+
         @media (min-width: 320px) {
         #gamefield img {
-            max-width: 30px;
-            max-height: 30px;
-            position: absolute;
+            max-width: 40px;
+            max-height: 40px;
             }
         }
 
         @media (min-width: 576px) {
         #gamefield img {
-            max-width: 40px;
-            max-height: 40px;
-            position: absolute;
+            max-width: 50px;
+            max-height: 50px;
             }
         }
 
         @media (min-width: 768px) {
         #gamefield img {
-            max-width: 50px;
-            max-height: 50px;
-            position: absolute;
+            max-width: 60px;
+            max-height: 60px;
             }
         }
 
         @media (min-width: 992px) {
             #gamefield img {
-            max-width: 60px;
-            max-height: 60px;
-            position: absolute;
+            max-width: 70px;
+            max-height: 70px;
             }
         }
 
@@ -74,7 +75,7 @@
         <div id="openGame" class="vw-100 vh-100">
             <div class="container">
                 <div class="row justify-content-center">
-                    <div class="my-5 col-12 col-sm-12 col-md-8 col-lg-8">
+                    <div class="my-3 col-12 col-sm-12 col-md-8 col-lg-8">
                         <img src="./img/title.svg" class="w-100 h-100" alt="星星射擊遊戲" title="星星射擊遊戲">
                     </div>
                 </div>
@@ -140,7 +141,8 @@ $(function(){
     $('#gameover').hide()
 
     $('#over').on('click',function(){
-        location.reload()
+        $('#openGame').show()
+        $('#gameover').hide()
     })
 
     $('#start, #startAgain').on('click',function(){
